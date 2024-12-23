@@ -25,8 +25,8 @@ use cires_ugwpv1_solv2,  only: cires_ugwpv1_ngw_solv2
 contains
 
 
-subroutine ugwpv1_ngw_init (lat_r,levs,dtp,rdzw,dzu,ntau_d1y,ugwp_taulat, &
-                            jindx1_tau,jindx2_tau,ddy_j1tau,ddy_j2tau) 
+subroutine ugwpv1_ngw_init (lat_r,levs,dtp,rdzw,dzu,ntau_d1y,knob_ugwp_tauamp,    &
+                            ugwp_taulat,jindx1_tau,jindx2_tau,ddy_j1tau,ddy_j2tau)
 
    use ugwp_common
    use mpas_atmphys_constants, only : P0
@@ -41,6 +41,7 @@ subroutine ugwpv1_ngw_init (lat_r,levs,dtp,rdzw,dzu,ntau_d1y,ugwp_taulat, &
    real(kind=kind_phys), dimension(:), intent(in) :: rdzw ! inverse delta-zeta at u-levels
    real(kind=kind_phys), dimension(:), intent(in) :: dzu  ! delta-zeta at w-levels
    integer, intent(in) :: ntau_d1y
+   real(kind=kind_phys), intent(in) :: knob_ugwp_tauamp
    real(kind=kind_phys), dimension(:), intent(in) :: ugwp_taulat
    integer, dimension(:), intent(inout) :: jindx1_tau, jindx2_tau
    real(kind=kind_phys), dimension(:), intent(inout) :: ddy_j1tau, ddy_j2tau
@@ -107,7 +108,7 @@ subroutine ugwpv1_ngw_init (lat_r,levs,dtp,rdzw,dzu,ntau_d1y,ugwp_taulat, &
       zu(k) = zu(k-1) + dzu(k)
    enddo
 
-   call cires_ugwpv1_init (levs, zu, p0_std, dtp)
+   call cires_ugwpv1_init (levs, zu, p0_std, dtp, knob_ugwp_tauamp)
 
    ! Calculate spatial interpolation weights for NGW tau_amf
    call cires_indx_ugwp(pi,lat_r,ntau_d1y,ugwp_taulat,               &

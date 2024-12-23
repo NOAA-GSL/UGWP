@@ -69,7 +69,7 @@ module  cires_ugwpv1_module
     real(kind=kind_phys)                  :: knob_ugwp_lzstar = 2.0e3      ! UTLS  mstar = 6.28/lzstar  2-2.5 km 
     real(kind=kind_phys)                  :: knob_ugwp_lzmin = 0.75e3      ! 1.5 km  min-VERT-WL of GW-spectra       
     real(kind=kind_phys)                  :: knob_ugwp_taumin = 0.25e-3
-    real(kind=kind_phys)                  :: knob_ugwp_tauamp = 0.13e-3    ! 0.13e-3 (3.25km horiz-grid) (FV3GFS values)
+    ! real(kind=kind_phys)                  :: knob_ugwp_tauamp = 3.e-3      ! 0.13e-3 (3.25km horiz-grid) (FV3GFS values)
                                                                            ! 0.5e-3 (13km grid), 0.8e-3 (26km grid), 1.5e-3 (52km grid)
                                                                            ! 3.e-3 (100km grid), 6.e-3 (200km grid), etc.
     real(kind=kind_phys)                  :: knob_ugwp_lhmet  = 200.e3     ! 200 km
@@ -141,7 +141,7 @@ module  cires_ugwpv1_module
 !
 !----------------------------------------------------------------------------------
 
-  subroutine cires_ugwpv1_init (levs, zu, pref, dtp)
+  subroutine cires_ugwpv1_init (levs, zu, pref, dtp, knob_ugwp_tauamp)
 !
 !  input_nml_file ='input.nml'=fn_nml   ..... OLD_namelist and cdmvgwd(4) Corrected Bug Oct 4
 !
@@ -162,6 +162,7 @@ module  cires_ugwpv1_module
     real(kind=kind_phys), dimension(:), intent (in) :: zu
     real(kind=kind_phys),    intent (in) :: pref
     real(kind=kind_phys),    intent (in) :: dtp
+    real(kind=kind_phys),    intent (in) :: knob_ugwp_tauamp
  
     integer :: ncid,  iernc, vid, dimid, status
     integer :: k
