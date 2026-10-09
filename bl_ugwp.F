@@ -33,6 +33,7 @@ contains
                      oa2d3ss, oa2d4ss,                                         &
                      ol2d1ss, ol2d2ss,                                         &
                      ol2d3ss, ol2d4ss,                                         & 
+                     alpha_fd,                                                 &
                      g_, cp_, rd_, rv_, fv_, pi_,                              &
                      dxmeter, deltim,                                          &
                      its, ite, kte, kme,                                       &
@@ -140,6 +141,7 @@ contains
                                                                         oa2d3ss, oa2d4ss, &
                                                                         ol2d1ss, ol2d2ss, &
                                                                         ol2d3ss, ol2d4ss
+   real(kind=kind_phys)                              , intent(in   ) :: alpha_fd  ! from Beljaars et al. (2004)
    character(len=*)                                  , intent(  out) :: errmsg
    integer                                           , intent(  out) :: errflg
 
@@ -236,7 +238,6 @@ contains
    real(kind=kind_phys)                               :: a1, a2, wsp, H_efold, hpbl2, &
                                                          tvcon
    real(kind=kind_phys), parameter                    :: coeff_fd = 6.325e-3_kind_phys   ! TOFD coefficient group
-   real(kind=kind_phys)                               :: alpha_fd   ! alpha coefficient from Beljaars et al. (2004)
    integer                                            :: kpbl2,kvar
    real(kind=kind_phys), dimension(its:ite,kts:kte)   :: za    ! height AGL of layer centers (m)
    real(kind=kind_phys)                               :: zs    ! height MSL of surface (m)
@@ -298,9 +299,6 @@ enddo
 
 ! Remove ss_tapering
 ss_taper(:) = 1.
-
-! Alpha coefficient for TOFD
-alpha_fd = 12._kind_phys
 
 !
 ! calculate length of grid for flow-blocking drag
