@@ -24,3 +24,6 @@ The following is a brief overview on using the suite:
 #REFERENCES
 [Toy 2021](https://ufs.epic.noaa.gov/wp-content/uploads/2021/07/UGWP_in_UFS_July_2021-1.pdf)
 [Toy et al, 2025](https://doi.org/10.25923/v2kx-8e10)
+
+### Working Practices and Governance
+See the [Wiki](https://github.com/NOAA-GSL/UGWP/wiki/Governance) for working practices and code governance.
